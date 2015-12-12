@@ -42,7 +42,7 @@ Using Docker Compose
 --------------------
 Clone the repository with::
 
-    git clone https://gitlab.com/mayan-edms/mayan-edms.git
+    git clone https://gitlab.com/mayan-edms/mayan-edms-docker.git
 
 Change to the directory of the cloned repository::
 
