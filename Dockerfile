@@ -16,9 +16,6 @@ RUN pip install psycopg2 redis uwsgi
 # Create Mayan EDMS basic settings/local.py file
 RUN mayan-edms.py createsettings
 
-# Install Mayan EDMS static media files
-RUN mayan-edms.py collectstatic --noinput
-
 ADD docker /docker
 
 # Setup Mayan EDMS settings file overrides
