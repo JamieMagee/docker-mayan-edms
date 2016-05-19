@@ -1,3 +1,5 @@
+|Docker badge|
+
 Description
 -----------
 
@@ -57,3 +59,9 @@ be available by browsing to http://127.0.0.1. You can inspect the initialization
 with::
 
     docker logs mayanedms_mayan-edms_1
+
+
+
+.. |Docker badge| image:: https://img.shields.io/docker/pulls/mayanedms/monolithic.svg
+   :target: https://hub.docker.com/r/mayanedms/monolithic/
+
