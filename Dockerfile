@@ -1,6 +1,6 @@
-FROM ubuntu:15.04
+FROM ubuntu:16.04
 
-MAINTAINER Roberto Rosario "roberto.rosario@mayan-edms.com"
+MAINTAINER Jamie Magee "jamie.magee@gmail.com"
 
 # Install base Ubuntu libraries
 RUN apt-get update && apt-get install -y netcat-openbsd python-dev python-pip gpgv nginx libpq-dev git-core libjpeg-dev libmagic1 libpng-dev libreoffice libtiff-dev gcc ghostscript gpgv tesseract-ocr unpaper poppler-utils && apt-get clean && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/archives/*.deb
@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y netcat-openbsd python-dev python-pip gp
 ENV MAYAN_INSTALL_DIR=/usr/local/lib/python2.7/dist-packages/mayan
 
 # Install Mayan EDMS, latest production release
-RUN pip install mayan-edms==2.0.2
+RUN pip install mayan-edms==2.1.3
 
 # Install Python clients for PostgreSQL, REDIS, and uWSGI
 RUN pip install psycopg2 redis uwsgi
@@ -16,7 +16,7 @@ RUN pip install psycopg2 redis uwsgi
 # Create Mayan EDMS basic settings/local.py file
 RUN mayan-edms.py createsettings
 
-ADD docker /docker
+COPY docker /docker
 
 # Setup Mayan EDMS settings file overrides
 RUN cat /docker/conf/mayan/settings.py >> $MAYAN_INSTALL_DIR/settings/local.py
