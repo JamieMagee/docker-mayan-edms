@@ -50,15 +50,17 @@ install_languages() {
 }
 
 if [[ "$1" != "/"* ]]; then
-	map_uidgid
-	set_permissions
-	
-	# Install additional languages if specified
+    map_uidgid
+    set_permissions
+
+    # Install additional languages if specified
     if [ ! -z "$OCR_LANGUAGES"  ]; then
         install_languages "$OCR_LANGUAGES"
     fi
-	
-	exec sudo -HEu mayan "/usr/src/mayan/manage.py" "$@"
+
+    ./manage.py migrate
+
+    exec sudo -HEu mayan "/usr/src/mayan/manage.py" "$@"
 fi
 
 exec "$@"

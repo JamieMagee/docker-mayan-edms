@@ -38,28 +38,25 @@ RUN mkdir -p /usr/src/mayan && \
 	git clone https://gitlab.com/mayan-edms/mayan-edms.git /usr/src/mayan && \
 	(cd /usr/src/mayan && git checkout -q tags/$MAYAN_VERSION) && \
 	(cd /usr/src/mayan && pip install --no-cache-dir -r requirements.txt)
-	
+
 # Create directories
 RUN mkdir -p /usr/src/mayan/mayan/media/document_cache
 RUN mkdir -p /usr/src/mayan/mayan/media/document_storage
 
-# Migrate database
+# Set working dir
 WORKDIR /usr/src/mayan
-RUN ./manage.py makemigrations
-RUN ./manage.py migrate
 
 # Create user
 RUN groupadd -g 1000 mayan \
     && useradd -u 1000 -g 1000 -d /usr/src/mayan mayan \
     && chown -Rh mayan:mayan /usr/src/mayan
-	
+
 # Setup entrypoint
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
-	
+
 # Mount volumes
-VOLUME ["/usr/src/mayan/mayan/media"]	
+VOLUME ["/usr/src/mayan/mayan/media"]
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
-#CMD ["--help"]
 CMD ["runserver", "0.0.0.0:8000"]
