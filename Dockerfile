@@ -1,37 +1,65 @@
-FROM ubuntu:16.04
-
+FROM python:2.7
 MAINTAINER Jamie Magee "jamie.magee@gmail.com"
 
-# Install base Ubuntu libraries
-RUN apt-get update && apt-get install -y netcat-openbsd python-dev python-pip gpgv nginx libpq-dev git-core libjpeg-dev libmagic1 libpng-dev libreoffice libtiff-dev gcc ghostscript gpgv tesseract-ocr unpaper poppler-utils && apt-get clean && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/archives/*.deb
+# Install base libraries
+RUN apt-get update && \
 
-ENV MAYAN_INSTALL_DIR=/usr/local/lib/python2.7/dist-packages/mayan
+apt-get install -y -q --no-install-recommends  \
+	sudo \
+	netcat-openbsd \
+	python-dev \
+	python-pip \
+	nginx \
+	libpq-dev \
+	git-core \
+	libjpeg-dev \
+	libmagic1 \
+	libpng-dev \
+	libreoffice \
+	libtiff-dev \
+	gcc \
+	ghostscript \
+	gpgv \
+	tesseract-ocr \
+	unpaper \
+	poppler-utils && \
 
-# Install Mayan EDMS, latest production release
-RUN pip install mayan-edms==2.1.3
+apt-get clean autoclean && \
 
-# Install Python clients for PostgreSQL, REDIS, and uWSGI
-RUN pip install psycopg2 redis uwsgi
+apt-get autoremove -y && \
 
-# Create Mayan EDMS basic settings/local.py file
-RUN mayan-edms.py createsettings
+rm -rf /var/lib/apt/lists/* && \
 
-COPY docker /docker
+rm -f /var/cache/apt/archives/*.deb
 
-# Setup Mayan EDMS settings file overrides
-RUN cat /docker/conf/mayan/settings.py >> $MAYAN_INSTALL_DIR/settings/local.py
+# Clone and install mayan edms
+ENV MAYAN_VERSION v2.1.3
+RUN mkdir -p /usr/src/mayan && \
+	git clone https://gitlab.com/mayan-edms/mayan-edms.git /usr/src/mayan && \
+	(cd /usr/src/mayan && git checkout -q tags/$MAYAN_VERSION) && \
+	(cd /usr/src/mayan && pip install --no-cache-dir -r requirements.txt)
+	
+# Create directories
+RUN mkdir -p /usr/src/mayan/mayan/media/document_cache
+RUN mkdir -p /usr/src/mayan/mayan/media/document_storage
 
-# Setup NGINX
-RUN rm /etc/nginx/sites-enabled/default
-RUN ln -s /docker/conf/nginx/mayan-edms /etc/nginx/sites-enabled/mayan-edms
+# Migrate database
+WORKDIR /usr/src/mayan
+RUN ./manage.py makemigrations
+RUN ./manage.py migrate
 
-# Setup UWSGI
-RUN mkdir /var/log/uwsgi
+# Create user
+RUN groupadd -g 1000 mayan \
+    && useradd -u 1000 -g 1000 -d /usr/src/mayan mayan \
+    && chown -Rh mayan:mayan /usr/src/mayan
+	
+# Setup entrypoint
+COPY entrypoint.sh /sbin/entrypoint.sh
+RUN chmod 755 /sbin/entrypoint.sh
+	
+# Mount volumes
+VOLUME ["/usr/src/mayan/mayan/media"]	
 
-# Persistent Mayan EDMS files
-VOLUME $MAYAN_INSTALL_DIR/media
-
-ENTRYPOINT ["/docker/entrypoint.sh"]
-
-EXPOSE 80
-CMD ["/docker/bin/run.sh"]
+ENTRYPOINT ["/sbin/entrypoint.sh"]
+#CMD ["--help"]
+CMD ["runserver", "0.0.0.0:8000"]
