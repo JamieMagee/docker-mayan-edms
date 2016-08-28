@@ -1,2 +1,4 @@
-*
-!docker
+.git
+.gitignore
+LICENSE
+README.rst
