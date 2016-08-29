@@ -1,6 +1,7 @@
 Mayan EDMS Docker Container
 ===========================
 [![Docker Pulls](https://img.shields.io/docker/pulls/jamiemagee/mayan-edms.svg?maxAge=2592000)]()
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
 
 A Docker container for [Mayan EDMS](gitlab.com/mayan-edms/mayan-edms)
 
@@ -15,7 +16,3 @@ Setup
 4. If this is the first time you've run Mayan EDMS, create an admin account by running
 
 	`docker exec -it mayan ./manage.py createautoadmin`
-
-License
-=======
-MIT License
