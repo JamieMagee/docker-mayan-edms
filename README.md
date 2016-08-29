@@ -4,7 +4,7 @@ Mayan EDMS Docker Container
 [![Docker Stars](https://img.shields.io/docker/stars/jamiemagee/mayan-edms.svg?maxAge=2592000)]()
 [![license](https://img.shields.io/github/license/jamiemagee/docker-mayan-edms.svg?maxAge=2592000)]()
 
-A Docker container for [Mayan EDMS](gitlab.com/mayan-edms/mayan-edms)
+A Docker container for [Mayan EDMS](https://gitlab.com/mayan-edms/mayan-edms)
 
 Setup
 =====
