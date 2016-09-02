@@ -12,7 +12,3 @@ Setup
 3. Run the docker container, replacing the `OCR_LANGUAGES` variable with the language codes for the from step 1.
 	
 	`docker run -d --name="mayan" -v /path/on/host:/usr/src/mayan/mayan/media -p 8000:8000 -e OCR_LANGUAGES="eng dan" jamiemagee/mayan-edms`
-
-4. If this is the first time you've run Mayan EDMS, create an admin account by running
-
-	`docker exec -it mayan ./manage.py createautoadmin`

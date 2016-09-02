@@ -49,6 +49,17 @@ install_languages() {
     rm -rf /var/lib/apt/lists/*
 }
 
+initial_setup() {
+    sudo -HEu mayan "/usr/src/mayan/manage.py" "createsettings"
+	sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate"
+	sudo -HEu mayan "/usr/src/mayan/manage.py" "createautoadmin"
+}
+
+upgrade() {
+    sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate"
+	sudo -HEu mayan "/usr/src/mayan/manage.py" "purgeperiodictasks"
+}
+
 if [[ "$1" != "/"* ]]; then
     map_uidgid
     set_permissions
@@ -58,7 +69,11 @@ if [[ "$1" != "/"* ]]; then
         install_languages "$OCR_LANGUAGES"
     fi
 
-    ./manage.py migrate
+	if [ ! -f mayan/media/db.sqlite3 ]; then
+	    initial_setup
+	else
+	    upgrade
+	fi
 
     exec sudo -HEu mayan "/usr/src/mayan/manage.py" "$@"
 fi
