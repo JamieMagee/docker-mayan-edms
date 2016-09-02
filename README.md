@@ -1,7 +1,4 @@
-[![Mayan EDMS 2.1.3](https://img.shields.io/badge/Mayan%20EDMS-2.1.3-brightgreen.svg)]()
-[![Docker Pulls](https://img.shields.io/docker/pulls/jamiemagee/mayan-edms.svg?maxAge=2592000)]()
-[![Docker Stars](https://img.shields.io/docker/stars/jamiemagee/mayan-edms.svg?maxAge=2592000)]()
-[![license](https://img.shields.io/github/license/jamiemagee/docker-mayan-edms.svg?maxAge=2592000)]()
+[![Mayan EDMS 2.1.3](https://img.shields.io/badge/Mayan%20EDMS-2.1.3-brightgreen.svg)]() [![Docker Pulls](https://img.shields.io/docker/pulls/jamiemagee/mayan-edms.svg?maxAge=2592000)]() [![Docker Stars](https://img.shields.io/docker/stars/jamiemagee/mayan-edms.svg?maxAge=2592000)]() [![license](https://img.shields.io/github/license/jamiemagee/docker-mayan-edms.svg?maxAge=2592000)]()
 
 A Docker container for [Mayan EDMS](https://gitlab.com/mayan-edms/mayan-edms)
 
