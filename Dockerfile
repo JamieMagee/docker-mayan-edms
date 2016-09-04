@@ -55,8 +55,9 @@ RUN groupadd -g 1000 mayan \
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 
-# Mount volumes
+# Mount volume
 VOLUME ["/usr/src/mayan/mayan/media"]
+EXPOSE 8000
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 CMD ["runserver", "0.0.0.0:8000"]
