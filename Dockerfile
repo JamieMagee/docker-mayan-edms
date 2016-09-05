@@ -56,7 +56,7 @@ COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 
 # Mount volume
-VOLUME ["/usr/src/mayan/mayan/media"]
+VOLUME ["/usr/src/mayan/mayan/media", "/tmp/settings.conf"]
 EXPOSE 8000
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]

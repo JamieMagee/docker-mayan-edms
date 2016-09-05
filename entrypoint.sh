@@ -60,6 +60,10 @@ upgrade() {
 	sudo -HEu mayan "/usr/src/mayan/manage.py" "purgeperiodictasks"
 }
 
+append_settings() {
+    cat /tmp/settings.conf >> mayan/settings/base.py
+}
+
 if [[ "$1" != "/"* ]]; then
     map_uidgid
     set_permissions
@@ -74,6 +78,8 @@ if [[ "$1" != "/"* ]]; then
 	else
 	    upgrade
 	fi
+
+	append_settings
 
     exec sudo -HEu mayan "/usr/src/mayan/manage.py" "$@"
 fi
