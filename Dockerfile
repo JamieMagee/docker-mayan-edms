@@ -33,12 +33,10 @@ rm -rf /var/lib/apt/lists/* && \
 rm -f /var/cache/apt/archives/*.deb
 
 # Clone and install mayan edms
-# ENV MAYAN_VERSION v2.1.4
-# Use commit id as the last version wasn't tagged
-ENV MAYAN_COMMIT 6c2f00e0d76b0852f4a20c1d0e0319cfc685222c
+ENV MAYAN_VERSION v2.1.5
 RUN mkdir -p /usr/src/mayan && \
 	git clone https://gitlab.com/mayan-edms/mayan-edms.git /usr/src/mayan && \
-	(cd /usr/src/mayan && git checkout -q $MAYAN_COMMIT) && \
+	(cd /usr/src/mayan && git checkout -q tags/$MAYAN_VERSION) && \
 	(cd /usr/src/mayan && pip install --no-cache-dir -r requirements.txt)
 
 # Create directories
