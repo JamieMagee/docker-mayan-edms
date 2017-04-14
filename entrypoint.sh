@@ -15,7 +15,7 @@ map_uidgid() {
 }
 
 set_permissions() {
-	# Set permissions for application directory
+    # Set permissions for application directory
     chown -Rh mayan:mayan /usr/src/mayan
 }
 
@@ -51,17 +51,19 @@ install_languages() {
 
 initial_setup() {
     sudo -HEu mayan "/usr/src/mayan/manage.py" "createsettings"
-	sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate"
-	sudo -HEu mayan "/usr/src/mayan/manage.py" "createautoadmin"
+    sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate"
+    sudo -HEu mayan "/usr/src/mayan/manage.py" "createautoadmin"
 }
 
 upgrade() {
     sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate"
-	sudo -HEu mayan "/usr/src/mayan/manage.py" "purgeperiodictasks"
+    sudo -HEu mayan "/usr/src/mayan/manage.py" "purgeperiodictasks"
 }
 
 append_settings() {
-    cat /tmp/settings.conf >> mayan/settings/base.py
+    if [[ -f /tmp/settings.conf ]]; then
+        cat /tmp/settings.conf >> mayan/settings/base.py
+    fi
 }
 
 if [[ "$1" != "/"* ]]; then
