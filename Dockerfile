@@ -33,7 +33,7 @@ rm -rf /var/lib/apt/lists/* && \
 rm -f /var/cache/apt/archives/*.deb
 
 # Clone and install mayan edms
-ENV MAYAN_VERSION v2.1.11
+ENV MAYAN_VERSION v2.2
 RUN mkdir -p /usr/src/mayan && \
 	git clone https://gitlab.com/mayan-edms/mayan-edms.git /usr/src/mayan && \
 	(cd /usr/src/mayan && git checkout -q tags/$MAYAN_VERSION) && \
