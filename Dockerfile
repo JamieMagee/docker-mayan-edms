@@ -60,4 +60,4 @@ VOLUME ["/usr/src/mayan/mayan/media", "/tmp/settings.conf"]
 EXPOSE 8000
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
-CMD ["runserver", "0.0.0.0:8000"]
+CMD ["runserver", "--insecure", "0.0.0.0:8000"]
