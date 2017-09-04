@@ -51,12 +51,12 @@ install_languages() {
 
 initial_setup() {
     sudo -HEu mayan "/usr/src/mayan/manage.py" "createsettings"
-    sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate"
+    sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate" "--no-input"
     sudo -HEu mayan "/usr/src/mayan/manage.py" "createautoadmin"
 }
 
 upgrade() {
-    sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate"
+    sudo -HEu mayan "/usr/src/mayan/manage.py" "migrate" "--no-input"
     sudo -HEu mayan "/usr/src/mayan/manage.py" "purgeperiodictasks"
 }
 
