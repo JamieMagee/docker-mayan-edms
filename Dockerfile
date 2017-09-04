@@ -3,8 +3,7 @@ MAINTAINER Jamie Magee "jamie.magee@gmail.com"
 
 # Install base libraries
 RUN apt-get update && \
-
-apt-get install -y -q --no-install-recommends  \
+apt-get install -y -q --no-install-recommends \
 	sudo \
 	netcat-openbsd \
 	python-dev \
@@ -23,13 +22,9 @@ apt-get install -y -q --no-install-recommends  \
 	tesseract-ocr \
 	unpaper \
 	poppler-utils && \
-
 apt-get clean autoclean && \
-
 apt-get autoremove -y && \
-
 rm -rf /var/lib/apt/lists/* && \
-
 rm -f /var/cache/apt/archives/*.deb
 
 # Clone and install mayan edms
