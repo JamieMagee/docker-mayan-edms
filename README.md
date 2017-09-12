@@ -1,4 +1,4 @@
-[![Mayan EDMS 2.7.1](https://img.shields.io/badge/Mayan%20EDMS-2.7.1-brightgreen.svg)]() 
+[![Mayan EDMS 2.7.3](https://img.shields.io/badge/Mayan%20EDMS-2.7.3-brightgreen.svg)]() 
 [![Docker Pulls](https://img.shields.io/docker/pulls/jamiemagee/mayan-edms.svg?maxAge=2592000)](https://hub.docker.com/r/jamiemagee/mayan-edms/)
 [![Docker Stars](https://img.shields.io/docker/stars/jamiemagee/mayan-edms.svg?maxAge=2592000)](https://hub.docker.com/r/jamiemagee/mayan-edms/)
 [![](https://images.microbadger.com/badges/image/jamiemagee/mayan-edms.svg)](https://microbadger.com/images/jamiemagee/mayan-edms "Get your own image badge on microbadger.com")
